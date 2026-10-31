@@ -1,6 +1,7 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Usagi's Fights</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Barlow+Condensed:wght@500;600;700&display=swap">
 <style>
 /* Concepto: cabina de recreativa nocturna. Escenario 16:9 con menús superpuestos; controles táctiles debajo en móvil. */
@@ -41,17 +42,47 @@ p{margin:0;color:var(--mute);line-height:1.25}
 .tag{font:700 13px var(--f-b);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
 .keys{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:17px}.keys b{color:var(--acc)}
 .slider{display:flex;align-items:center;gap:10px}.slider input{flex:1;accent-color:var(--acc)}
-#touch{display:none;justify-content:space-between;align-items:center;gap:12px;user-select:none;-webkit-user-select:none;touch-action:none}
+/* controles táctiles: joystick a la izquierda, botones a la derecha, encima del escenario */
+#touch{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none}
 #touch[hidden]{display:none!important}
-@media (pointer:coarse){#touch{display:flex}}
-#touch.show{display:flex}
-#touch .pad,#touch .acts{display:grid;gap:6px}
-#touch .pad{grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px)}
-#touch .acts{grid-template-columns:repeat(3,58px);grid-template-rows:repeat(2,58px)}
-#touch button{font:700 18px var(--f-b);color:var(--fg);background:var(--panel2);border:2px solid var(--line);border-radius:50%;touch-action:none}
-#touch button.on{background:var(--acc);color:#1b1230}
+@media (pointer:coarse){#touch{display:block}}
+#touch.show{display:block}
+#touch .joy{position:absolute;left:calc(env(safe-area-inset-left,0px) + 3vw);bottom:calc(env(safe-area-inset-bottom,0px) + 5vh);width:150px;height:150px;border-radius:50%;background:rgba(26,20,54,.42);border:2px solid rgba(169,159,207,.6);pointer-events:auto;touch-action:none;transform-origin:bottom left;transform:scale(var(--s,1))}
+#touch .joy::before{content:'';position:absolute;inset:34px;border-radius:50%;border:2px dashed rgba(169,159,207,.3)}
+#touch .joy i{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(255,194,51,.8);border:2px solid rgba(255,255,255,.55);box-shadow:0 2px 8px #0008}
+#touch .acts{position:absolute;right:calc(env(safe-area-inset-right,0px) + 2vw);bottom:calc(env(safe-area-inset-bottom,0px) + 5vh);width:232px;height:164px;transform-origin:bottom right;transform:scale(var(--s,1))}
+#touch .acts button{position:absolute;padding:0;font:700 14px var(--f-b);letter-spacing:.03em;color:var(--fg);background:rgba(42,32,86,.62);border:2px solid rgba(169,159,207,.7);border-radius:50%;pointer-events:auto;touch-action:none;-webkit-tap-highlight-color:transparent}
+#touch .acts button.on{background:var(--acc);color:#1b1230;border-color:var(--acc)}
+.b-atk{width:78px;height:78px;right:4px;bottom:4px;font-size:16px!important;background:rgba(255,77,58,.55)!important}
+.b-jump{width:66px;height:66px;right:92px;bottom:8px}
+.b-heavy{width:62px;height:62px;right:10px;bottom:90px}
+.b-ult{width:54px;height:54px;right:84px;bottom:86px;font-size:24px!important}
+.b-dash{width:54px;height:54px;right:162px;bottom:20px}
+.b-crouch{width:54px;height:54px;right:156px;bottom:84px;font-size:11px!important}
+#fs{position:absolute;top:8px;right:8px;z-index:4;width:38px;height:38px;border-radius:4px;border:2px solid var(--line);background:rgba(26,20,54,.8);color:var(--fg);font:700 20px/1 var(--f-b);cursor:pointer;padding:0}
+#fs:hover,#fs:focus-visible{background:var(--acc);color:#1b1230;border-color:var(--acc);outline:none}
+#fs[hidden],#stage:not(.inmenu) #fs{display:none!important}
+#ui{z-index:3}
+#rotate{display:none;position:fixed;inset:0;z-index:99;background:var(--bg);color:var(--fg);flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px}
+#rotate .ico{font-size:64px;animation:rot 2.2s ease-in-out infinite}
+#rotate b{font:400 26px var(--f-d);color:var(--acc)}
+@keyframes rot{0%,20%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+/* pantalla completa: el lienzo se ajusta sin deformarse */
+#stage:fullscreen #c{object-fit:contain}#stage:-webkit-full-screen #c{object-fit:contain}
+#stage.inmenu:fullscreen #c{object-fit:cover}#stage.inmenu:-webkit-full-screen #c{object-fit:cover}
+/* móvil: horizontal obligatorio y escenario a toda la pantalla */
+@media (pointer:coarse){
+  html,body{overflow:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  body{padding:0}#app{max-width:none;gap:0}
+  #stage{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;aspect-ratio:auto;border:0;border-radius:0;z-index:1}
+  #c{object-fit:contain}#stage.inmenu #c{object-fit:cover}
+  #ui{padding-left:max(clamp(10px,2.5%,26px),env(safe-area-inset-left,0px));padding-right:max(clamp(10px,2.5%,26px),env(safe-area-inset-right,0px))}
+  #hint{display:none}
+  #ui .wide>.row:last-child{position:sticky;bottom:0;z-index:2;padding:8px 0 2px;background:linear-gradient(rgba(13,10,31,0),rgba(13,10,31,.96) 35%)}
+}
+@media (pointer:coarse) and (orientation:portrait){#rotate{display:flex}}
 .hint{font-size:15px;color:var(--mute)}
-@media (max-width:720px){
+@media (max-width:720px) and (pointer:fine){
   #stage.inmenu{aspect-ratio:auto;min-height:560px}
   #stage.inmenu #c{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   #stage.inmenu #ui{position:relative;inset:auto;flex-direction:column;min-height:560px}
@@ -77,13 +108,16 @@ label.btn{cursor:pointer}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <div id="app">
-  <div id="stage" class="inmenu"><canvas id="c" width="960" height="540" tabindex="0" aria-label="Escenario del juego"></canvas><div id="ui"></div></div>
-  <div id="touch" hidden>
-    <div class="pad"><span></span><button data-k="u">▲</button><span></span><button data-k="l">◀</button><span></span><button data-k="r">▶</button><span></span><button data-k="d">▼</button><span></span></div>
-    <div class="acts"><button data-k="atk">GOLPE</button><button data-k="jump">SALTO</button><button data-k="heavy">FUERTE</button><button data-k="ult">★</button><button data-k="dash">DASH</button><button data-k="crouch">AGACHAR</button></div>
+  <div id="stage" class="inmenu"><canvas id="c" width="960" height="540" tabindex="0" aria-label="Escenario del juego"></canvas><div id="ui"></div>
+    <button id="fs" title="Pantalla completa (F)" aria-label="Pantalla completa">⛶</button>
+    <div id="touch" hidden>
+      <div class="joy" aria-label="Joystick"><i></i></div>
+      <div class="acts"><button class="b-atk" data-k="atk">GOLPE</button><button class="b-jump" data-k="jump">SALTO</button><button class="b-heavy" data-k="heavy">FUERTE</button><button class="b-ult" data-k="ult">★</button><button class="b-dash" data-k="dash">DASH</button><button class="b-crouch" data-k="crouch">AGACH.</button></div>
+    </div>
   </div>
-  <div class="hint" id="hint">Mueve con flechas o WASD · J golpe · K salto · L ataque fuerte (cuesta vida) · I estrella · Shift dash · Q agacharse · P pausa · Mando: X golpe · A salto · Y fuerte · RB estrella · B dash · LB agacharse · Start pausa</div>
+  <div class="hint" id="hint">Mueve con flechas o WASD · J golpe · K salto · L ataque fuerte (cuesta vida) · I estrella · Shift dash · Q agacharse · P pausa · F pantalla completa · Mando: X golpe · A salto · Y fuerte · RB estrella · B dash · LB agacharse · Start pausa</div>
 </div>
+<div id="rotate"><div class="ico">📱</div><b>Gira el móvil</b><span>Usagi's Fights solo se puede jugar en horizontal.</span></div>
 <script>
 'use strict';
 /* ============ DATOS ============ */
@@ -246,6 +280,7 @@ const MAP={ArrowLeft:'l',KeyA:'l',ArrowRight:'r',KeyD:'r',ArrowUp:'u',KeyW:'u',A
 function press(a){if(!keys[a])pressed[a]=1;keys[a]=1}
 function release(a){keys[a]=0}
 addEventListener('keydown',e=>{
+  if(e.code==='KeyF'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!(document.activeElement&&document.activeElement.tagName==='INPUT')){toggleFS();e.preventDefault();return}
   if(G&&G.run&&!G.menuOpen){const a=MAP[e.code];if(a){press(a);e.preventDefault()}return}
   if(['ArrowDown','ArrowRight','ArrowUp','ArrowLeft'].includes(e.code)){
     const b=[...ui.querySelectorAll('button:not([disabled]),input')],i=b.indexOf(document.activeElement);
@@ -258,6 +293,31 @@ addEventListener('blur',()=>{for(const k in keys)keys[k]=0});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&G&&G.run&&!G.menuOpen&&!G.online)pauseMenu()});
 stage.addEventListener('pointerdown',()=>{try{window.focus();if(G&&G.run&&!G.menuOpen)cv.focus({preventScroll:true})}catch(e){}});
 if(navigator.maxTouchPoints>0)touch.classList.add('show');
+/* ---- pantalla completa ---- */
+const fsBtn=document.getElementById('fs'),canFS=!!(stage.requestFullscreen||stage.webkitRequestFullscreen);
+const isFS=()=>!!(document.fullscreenElement||document.webkitFullscreenElement);
+function lockLandscape(){try{const o=window.screen&&window.screen.orientation;if(o&&o.lock)o.lock('landscape').catch(()=>{})}catch(e){}}
+function enterFS(){if(!canFS||isFS())return;try{const r=(stage.requestFullscreen||stage.webkitRequestFullscreen).call(stage);if(r&&r.then)r.then(lockLandscape).catch(()=>{});else lockLandscape()}catch(e){}}
+function toggleFS(){if(!canFS)return;if(isFS()){try{(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}else enterFS()}
+if(!canFS)fsBtn.hidden=true;
+fsBtn.addEventListener('click',()=>{toggleFS();try{cv.focus({preventScroll:true})}catch(e){}});
+/* ---- móvil: escala de controles y horizontal obligatorio ---- */
+function fitTouch(){const s=Math.max(.6,Math.min(1.25,Math.min(innerHeight/400,innerWidth/820)));touch.style.setProperty('--s',s.toFixed(2))}
+addEventListener('resize',fitTouch);fitTouch();
+const portraitMQ=matchMedia('(pointer:coarse) and (orientation:portrait)');
+portraitMQ.addEventListener&&portraitMQ.addEventListener('change',e=>{if(e.matches){for(const k in keys)keys[k]=0;if(G&&G.run&&!G.menuOpen&&!G.online)pauseMenu()}else fitTouch()});
+/* ---- joystick virtual ---- */
+(function(){const joy=touch.querySelector('.joy'),knob=joy.querySelector('i');let pid=null;
+  function apply(nx,ny){const dead=.3;
+    (nx<-dead?press:release)('l');(nx>dead?press:release)('r');(ny<-dead?press:release)('u');(ny>dead?press:release)('d')}
+  function move(e){const r=joy.getBoundingClientRect(),R=r.width/2;let nx=(e.clientX-(r.left+R))/R,ny=(e.clientY-(r.top+R))/R;
+    const m=Math.hypot(nx,ny);if(m>1){nx/=m;ny/=m}
+    const lim=joy.offsetWidth/2*.55;knob.style.transform='translate('+nx*lim+'px,'+ny*lim+'px)';apply(nx,ny)}
+  function end(e){if(e.pointerId!==pid)return;pid=null;knob.style.transform='';apply(0,0)}
+  joy.addEventListener('pointerdown',e=>{e.preventDefault();pid=e.pointerId;try{joy.setPointerCapture(pid)}catch(_){}move(e)});
+  joy.addEventListener('pointermove',e=>{if(e.pointerId===pid)move(e)});
+  joy.addEventListener('pointerup',end);joy.addEventListener('pointercancel',end);joy.addEventListener('lostpointercapture',end);
+  touch.addEventListener('contextmenu',e=>e.preventDefault())})();
 touch.querySelectorAll('button').forEach(b=>{const a=b.dataset.k;
   b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);b.classList.add('on');press(a)});
   const up=e=>{b.classList.remove('on');release(a)};b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);b.addEventListener('lostpointercapture',up)});
@@ -1014,7 +1074,7 @@ function loop(ts){
 }
 
 /* ============ MENÚS ============ */
-function screen(html,hint){
+function showScreen(html,hint){
   ui.hidden=false;stage.classList.add('inmenu');ui.innerHTML=html;
   const f=ui.querySelector('button:not([disabled])');if(f)f.focus({preventScroll:true});
 }
@@ -1055,7 +1115,7 @@ function showDetail(i){
 const A={
  main(){A.cur=A.main;
   menuBgIdx=9;
-  screen(`<div class="col hero"><h1>Usagi's<br>Fights</h1><p>Once calles, once jefes y un solo héroe. Abre camino a golpes y recupera lo que es tuyo.</p><p class="hint">Prototipo jugable · ${CHARS.length} personajes · 11 capítulos</p></div>
+  showScreen(`<div class="col hero"><h1>Usagi's<br>Fights</h1><p>Once calles, once jefes y un solo héroe. Abre camino a golpes y recupera lo que es tuyo.</p><p class="hint">Prototipo jugable · ${CHARS.length} personajes · 11 capítulos</p></div>
   <div class="col side">
    <button class="btn" data-do="story">Modo Historia <small>Cap. ${save.unlocked}/11</small></button>
    <button class="btn" data-do="phase">Selección de fase</button>
@@ -1066,27 +1126,27 @@ const A={
  },
  story(){
   const n=Math.min(11,save.unlocked);
-  screen(`<div class="col side"><h2>Modo Historia</h2><p>Avanza capítulo a capítulo. Cada uno acaba con un jefe único.</p>
+  showScreen(`<div class="col side"><h2>Modo Historia</h2><p>Avanza capítulo a capítulo. Cada uno acaba con un jefe único.</p>
    <button class="btn" data-do="go" data-a="${n-1}" data-from="story">Continuar <small>Cap. ${n}: ${esc(CH[n-1].n)}</small></button>
    <button class="btn" data-do="go" data-a="0" data-from="story">Empezar desde el capítulo 1</button>
    <button class="btn" data-do="phase">Elegir capítulo</button>
    <button class="btn" data-do="main">Volver</button></div>`);
  },
  phase(){
-  screen(`<div class="col wide"><h2>Selección de fase</h2><p>Juega cualquier capítulo cuando quieras y mejora tu rango.</p>
+  showScreen(`<div class="col wide"><h2>Selección de fase</h2><p>Juega cualquier capítulo cuando quieras y mejora tu rango.</p>
    <div class="grid">${CH.map((c,i)=>{const ok=true,b=save.best[i];
     return`<button class="btn" ${ok?'':'disabled'} data-do="go" data-from="phase" data-a="${i}" style="flex-direction:column;align-items:flex-start;gap:2px"><small>CAP. ${i+1}${b?' · RANGO '+b:''}</small><span style="font-size:17px">${ok?esc(c.n):'Bloqueado'}</span></button>`}).join('')}</div>
    <button class="btn" data-do="main">Volver</button></div>`);
  },
  arcade(){
-  screen(`<div class="col side"><h2>Modo Arcade</h2><p>Oleadas sin fin y un jefe cada cinco. Cada baja da XP para subir de nivel a tu luchador, hasta el nivel 100, y aprender habilidades nuevas.</p>
+  showScreen(`<div class="col side"><h2>Modo Arcade</h2><p>Oleadas sin fin y un jefe cada cinco. Cada baja da XP para subir de nivel a tu luchador, hasta el nivel 100, y aprender habilidades nuevas.</p>
    <p>Récord: ${save.arcadeBest} puntos</p>
    <button class="btn" data-do="goArcade">Jugar</button><button class="btn" data-do="main">Volver</button></div>`);
  },
- extras(){screen(`<div class="col side"><h2>Extras</h2><button class="btn" data-do="settings">Ajustes</button><button class="btn" data-do="gallery">Galería de arte</button><button class="btn" data-do="main">Volver</button></div>`)},
+ extras(){showScreen(`<div class="col side"><h2>Extras</h2><button class="btn" data-do="settings">Ajustes</button><button class="btn" data-do="gallery">Galería de arte</button><button class="btn" data-do="main">Volver</button></div>`)},
  settings(){
   const s=save.set;
-  screen(`<div class="col wide"><h2>Ajustes</h2>
+  showScreen(`<div class="col wide"><h2>Ajustes</h2>
    <div class="slider"><span class="tag">Volumen</span><input id="vol" type="range" min="0" max="100" value="${Math.round(s.vol*100)}" aria-label="Volumen"></div>
    <div class="row"><button class="btn ${s.shake?'on':''}" data-do="tg" data-a="shake">Sacudida: ${s.shake?'sí':'no'}</button><button class="btn ${s.fx?'on':''}" data-do="tg" data-a="fx">Partículas: ${s.fx?'todas':'pocas'}</button>
    <button class="btn ${(s.res||1)===1?'on':''}" data-do="res" data-a="1">Resolución 960×540</button><button class="btn ${s.res===.67?'on':''}" data-do="res" data-a=".67">Resolución 640×360</button></div>
@@ -1096,13 +1156,13 @@ const A={
    <div class="row"><button class="btn" data-do="reset">Borrar progreso</button><button class="btn" data-do="extras">Volver</button></div></div>`);
   document.getElementById('vol').addEventListener('input',e=>{save.set.vol=e.target.value/100;persist();S.hit()});
  },
- reset(){screen(`<div class="col side"><h2>¿Borrar todo el progreso?</h2><p>Se pierden capítulos, rangos, niveles y récords.</p><button class="btn" data-do="reset2">Sí, borrar</button><button class="btn" data-do="settings">Cancelar</button></div>`);ui.querySelectorAll('button')[1].focus()},
+ reset(){showScreen(`<div class="col side"><h2>¿Borrar todo el progreso?</h2><p>Se pierden capítulos, rangos, niveles y récords.</p><button class="btn" data-do="reset2">Sí, borrar</button><button class="btn" data-do="settings">Cancelar</button></div>`);ui.querySelectorAll('button')[1].focus()},
  reset2(){save=SAVE0();persist();A.settings()},
  tg(k){save.set[k]=!save.set[k];persist();A.settings()},
  res(v){save.set.res=+v;persist();A.settings()},
  gallery(){
   const cards=[...CHARS.map(c=>({n:c.name,t:c.role,l:c.lore,pal:c.pal,s:c.s,ok:1})),...CH.map((c,i)=>({n:c.boss,t:'Jefe · Cap. '+(i+1),l:c.lore,pal:{skin:'#d9a88a',hair:c.c,shirt:c.c,pants:'#1a1228'},s:1.2,ok:!!save.bosses[i],boss:1}))];
-  screen(`<div class="col wide"><h2>Galería de arte</h2><p>Los jefes se desbloquean al derrotarlos en el Modo Historia.</p>
+  showScreen(`<div class="col wide"><h2>Galería de arte</h2><p>Los jefes se desbloquean al derrotarlos en el Modo Historia.</p>
    <div class="grid">${cards.map((c,i)=>`<div class="card"><canvas width="150" height="180" data-g="${i}"></canvas><b>${c.ok?esc(c.n):'???'}</b><span class="tag">${esc(c.t)}</span><span>${c.ok?esc(c.l):'Derrótalo para ver su diseño.'}</span></div>`).join('')}</div>
    <button class="btn" data-do="extras">Volver</button></div>`);
   ui.querySelectorAll('canvas[data-g]').forEach(k=>{const c=cards[+k.dataset.g],g=k.getContext('2d');
@@ -1113,7 +1173,7 @@ const A={
  go(ch,el){pending={mode:'story',ch:+ch,from:el?.dataset.from||'story'};A.charsel()},
  goArcade(){pending={mode:'arcade',ch:0,from:'arcade'};A.charsel()},
  charsel(){
-  screen(`<div class="col wide" style="gap:10px"><h2>Elige tu luchador</h2>
+  showScreen(`<div class="col wide" style="gap:10px"><h2>Elige tu luchador</h2>
    <div class="sel"><div class="thumbs">${CHARS.map((c,i)=>`<button class="thumb ${i===sel?'on':''}" data-do="pick" data-a="${i}"><canvas width="44" height="54" data-p="${i}"></canvas><span>${c.name}<small>Nv ${save.chars[c.id].lvl}</small></span></button>`).join('')}</div>
    <div id="detail" class="detail"></div></div>
    <div class="row"><button class="btn" data-do="play">Jugar</button><button class="btn" data-do="back">Volver</button></div></div>`);
@@ -1162,11 +1222,11 @@ function netApply(m){if(!G||!G.guest||!G.run)return;
   G.ps=m.ps.map(q=>{const c=CHARS.find(x=>x.id===q.c)||CHARS[0];q.c=c;q.kit=c.kit;return q});
   G.p=G.ps[G.me];G.en=m.en;G.items=m.items;G.objs=m.objs;G.pr=m.pr;G.fx=m.fx;G.txt=m.txt;G.boss=m.en.find(e=>e.boss)||null}
 function onlineEnd(win){if(G)G.run=false;touch.hidden=true;mode='menu';for(const k in keys)keys[k]=0;
-  screen(`<div class="col side"><h2>${win?'¡Victoria!':'Derrota'}</h2><p>${win?'Habéis superado el reto.':'El barrio os ha ganado esta vez.'}${G&&G.mode==='arcade'?' Oleada '+G.wave+' · '+G.score+' puntos.':''}</p><button class="btn" data-do="lobby">Volver a la sala</button><button class="btn" data-do="nleave">Salir de la sala</button></div>`)}
+  showScreen(`<div class="col side"><h2>${win?'¡Victoria!':'Derrota'}</h2><p>${win?'Habéis superado el reto.':'El barrio os ha ganado esta vez.'}${G&&G.mode==='arcade'?' Oleada '+G.wave+' · '+G.score+' puntos.':''}</p><button class="btn" data-do="lobby">Volver a la sala</button><button class="btn" data-do="nleave">Salir de la sala</button></div>`)}
 Object.assign(A,{
- online(){screen(`<div class="col side"><h2>Online</h2><p>Juega Historia o Arcade con amigos en una sala. Uno crea la sala y el resto entra con el código (hasta 4 jugadores). Los niveles no se guardan en las partidas online.</p><button class="btn" data-do="ncreate">Crear sala</button><button class="btn" data-do="njoinui">Unirse a una sala</button><button class="btn" data-do="main">Volver</button></div>`)},
- nerr(msg){netClose();screen(`<div class="col side"><h2>Online</h2><p>${esc(msg)}</p><button class="btn" data-do="online">Volver</button></div>`)},
- ncreate(){screen('<div class="col side"><h2>Creando sala…</h2></div>');
+ online(){showScreen(`<div class="col side"><h2>Online</h2><p>Juega Historia o Arcade con amigos en una sala. Uno crea la sala y el resto entra con el código (hasta 4 jugadores). Los niveles no se guardan en las partidas online.</p><button class="btn" data-do="ncreate">Crear sala</button><button class="btn" data-do="njoinui">Unirse a una sala</button><button class="btn" data-do="main">Volver</button></div>`)},
+ nerr(msg){netClose();showScreen(`<div class="col side"><h2>Online</h2><p>${esc(msg)}</p><button class="btn" data-do="online">Volver</button></div>`)},
+ ncreate(){showScreen('<div class="col side"><h2>Creando sala…</h2></div>');
   loadPeer(ok=>{if(!ok)return A.nerr('No se pudo cargar la conexión online (¿sin internet?).');
    const to=setTimeout(()=>A.nerr('No se pudo crear la sala: el servidor online no responde. Comprueba tu conexión o prueba más tarde. Historia y Arcade funcionan sin conexión.'),9000);
    const mk=()=>{const code=Array.from({length:4},()=>'ABCDEFGHJKMNPQRSTUVWXYZ'[Math.floor(Math.random()*23)]).join('');
@@ -1175,9 +1235,9 @@ Object.assign(A,{
     pe.on('error',er=>{if(er.type==='unavailable-id'){try{pe.destroy()}catch(e){}mk()}else{clearTimeout(to);A.nerr(netErrMsg(er))}});
     pe.on('connection',c=>{c.on('data',d=>netHost(c,d));c.on('close',()=>netDrop(c))})};
    mk()})},
- njoinui(){screen(`<div class="col side"><h2>Unirse a una sala</h2><p>Escribe el código de 4 letras.</p><input id="rc" maxlength="4" autocomplete="off" style="font:400 30px 'Bungee',Impact,sans-serif;text-transform:uppercase;width:170px;padding:8px;text-align:center"><button class="btn" data-do="njoin">Entrar</button><button class="btn" data-do="online">Volver</button></div>`);ui.querySelector('#rc').focus()},
+ njoinui(){showScreen(`<div class="col side"><h2>Unirse a una sala</h2><p>Escribe el código de 4 letras.</p><input id="rc" maxlength="4" autocomplete="off" style="font:400 30px 'Bungee',Impact,sans-serif;text-transform:uppercase;width:170px;padding:8px;text-align:center"><button class="btn" data-do="njoin">Entrar</button><button class="btn" data-do="online">Volver</button></div>`);ui.querySelector('#rc').focus()},
  njoin(){const code=(ui.querySelector('#rc').value||'').toUpperCase().trim();if(code.length!==4)return;
-  screen('<div class="col side"><h2>Conectando…</h2></div>');
+  showScreen('<div class="col side"><h2>Conectando…</h2></div>');
   loadPeer(ok=>{if(!ok)return A.nerr('No se pudo cargar la conexión online (¿sin internet?).');
    const pe=new Peer(undefined,{config:{iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'},{urls:['turn:openrelay.metered.ca:80','turn:openrelay.metered.ca:443','turns:openrelay.metered.ca:443?transport=tcp'],username:'openrelayproject',credential:'openrelayproject'}]}});net.peer=pe;const to=setTimeout(()=>A.nerr('No se encontró la sala '+code+'.'),10000);
    pe.on('error',er=>{clearTimeout(to);A.nerr(er.type==='peer-unavailable'?'No existe la sala '+code+'.':netErrMsg(er))});
@@ -1186,7 +1246,7 @@ Object.assign(A,{
     c.on('data',netGuest);
     c.on('close',()=>{if(net.room){if(G&&G.run){G.run=false;touch.hidden=true;mode='menu'}netClose();A.nerr('La sala se ha cerrado.')}})})})},
  lobby(){const pl=net.pl,host=net.host;
-  screen(`<div class="col wide" style="gap:10px"><h2>Sala <span style="color:var(--acc)">${net.code}</span></h2>
+  showScreen(`<div class="col wide" style="gap:10px"><h2>Sala <span style="color:var(--acc)">${net.code}</span></h2>
    <p>Comparte el código con tus amigos · ${pl.length}/4 jugadores</p>
    <div class="grid">${pl.map((q,i)=>{const c=CHARS.find(x=>x.id===q.cid)||CHARS[0];return`<div class="card"><b>J${i+1}${i===net.me?' (tú)':''}${i===0?' · anfitrión':''}</b><span class="tag" style="color:${c.col}">${c.name}</span><span>Nv ${q.lvl}</span></div>`}).join('')}</div>
    <div class="tag">Tu luchador</div>
@@ -1200,7 +1260,7 @@ Object.assign(A,{
  nstart(){if(!net.host)return;Object.assign(net.pl[0],myInfo());startGame(net.mode,net.mode==='story'?net.ch:0)},
  nleave(){netClose();A.main()}
 });
-ui.addEventListener('click',e=>{const b=e.target.closest('[data-do]');if(!b||b.disabled)return;const f=A[b.dataset.do];if(f){S.pick();f(b.dataset.a,b)}});
+ui.addEventListener('click',e=>{const b=e.target.closest('[data-do]');if(!b||b.disabled)return;const f=A[b.dataset.do];if(f){S.pick();if(matchMedia('(pointer:coarse)').matches&&['play','start','startArcade','nstart'].includes(b.dataset.do))enterFS();f(b.dataset.a,b)}});
 ui.addEventListener('focusin',e=>{const t=e.target.closest&&e.target.closest('.thumb');if(t&&+t.dataset.a!==sel)showDetail(+t.dataset.a)});
 ui.addEventListener('mouseover',e=>{const t=e.target.closest&&e.target.closest('.thumb');if(t&&+t.dataset.a!==sel)showDetail(+t.dataset.a)});
 ui.addEventListener('dblclick',e=>{if(e.target.closest&&e.target.closest('.thumb'))A.play()});
@@ -1225,7 +1285,7 @@ function showResult(win,rank){
     btns='<button class="btn" data-do="startArcade">Otra partida</button>';
   }
   const lv=G.learnedAll.length?`<p>Habilidades nuevas: <b style="color:var(--teal)">${G.learnedAll.map(esc).join(', ')}</b></p>`:'';
-  screen(`<div class="col side"><h2>${title}</h2>${body}<p>${G.p.c.name} · nivel ${save.chars[G.p.c.id].lvl}</p>${lv}${btns}<button class="btn" data-do="change">Cambiar de personaje</button><button class="btn" data-do="main">Menú principal</button></div>`);
+  showScreen(`<div class="col side"><h2>${title}</h2>${body}<p>${G.p.c.name} · nivel ${save.chars[G.p.c.id].lvl}</p>${lv}${btns}<button class="btn" data-do="change">Cambiar de personaje</button><button class="btn" data-do="main">Menú principal</button></div>`);
 }
 function pauseMenu(){
   G.menuOpen=true;ui.hidden=false;ui.innerHTML=`<div class="col side"><h2>Pausa</h2><button class="btn" data-do="resume">Continuar</button><button class="btn" data-do="restart">Reiniciar</button><button class="btn" data-do="quit">Salir al menú</button></div>`;
