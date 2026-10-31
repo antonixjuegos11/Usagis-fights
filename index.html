@@ -1069,11 +1069,12 @@ const A={
   screen(`<div class="col side"><h2>Modo Historia</h2><p>Avanza capítulo a capítulo. Cada uno acaba con un jefe único.</p>
    <button class="btn" data-do="go" data-a="${n-1}" data-from="story">Continuar <small>Cap. ${n}: ${esc(CH[n-1].n)}</small></button>
    <button class="btn" data-do="go" data-a="0" data-from="story">Empezar desde el capítulo 1</button>
+   <button class="btn" data-do="phase">Elegir capítulo</button>
    <button class="btn" data-do="main">Volver</button></div>`);
  },
  phase(){
-  screen(`<div class="col wide"><h2>Selección de fase</h2><p>Repite cualquier capítulo ya desbloqueado para mejorar tu rango.</p>
-   <div class="grid">${CH.map((c,i)=>{const ok=i<save.unlocked,b=save.best[i];
+  screen(`<div class="col wide"><h2>Selección de fase</h2><p>Juega cualquier capítulo cuando quieras y mejora tu rango.</p>
+   <div class="grid">${CH.map((c,i)=>{const ok=true,b=save.best[i];
     return`<button class="btn" ${ok?'':'disabled'} data-do="go" data-from="phase" data-a="${i}" style="flex-direction:column;align-items:flex-start;gap:2px"><small>CAP. ${i+1}${b?' · RANGO '+b:''}</small><span style="font-size:17px">${ok?esc(c.n):'Bloqueado'}</span></button>`}).join('')}</div>
    <button class="btn" data-do="main">Volver</button></div>`);
  },
@@ -1131,6 +1132,9 @@ const net={room:false,host:false,code:'',pl:[],me:0,peer:null,conn:null,mode:'st
 const NRE=(k,v)=>v instanceof Set?undefined:v;
 function netSend(c,o){try{if(c&&c.open)c.send(JSON.stringify(o,NRE))}catch(e){}}
 function loadPeer(cb){if(window.Peer)return cb(true);const t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/peerjs@1.5.2/dist/peerjs.min.js';t.onload=()=>cb(!!window.Peer);t.onerror=()=>cb(false);document.head.appendChild(t)}
+function netErrMsg(er){const t=er&&er.type;
+  if(t==='network'||t==='server-error'||t==='socket-error'||t==='socket-closed'||t==='browser-incompatible')return 'No se pudo contactar con el servidor online. Comprueba tu conexión: algunas redes o páginas alojadas bloquean esta función. Mientras tanto puedes jugar Historia y Arcade sin conexión.';
+  return 'Error de conexión: '+t}
 const myInfo=()=>({cid:CHARS[sel].id,lvl:save.chars[CHARS[sel].id].lvl});
 function netClose(){try{net.peer&&net.peer.destroy()}catch(e){}net.peer=null;net.conn=null;net.room=false;net.host=false;net.pl=[]}
 function lobbyBroadcast(){net.pl.forEach((q,i)=>{if(q.conn)netSend(q.conn,{t:'lobby',me:i,mode:net.mode,ch:net.ch,pl:net.pl.map(z=>({cid:z.cid,lvl:z.lvl}))})})}
@@ -1164,10 +1168,11 @@ Object.assign(A,{
  nerr(msg){netClose();screen(`<div class="col side"><h2>Online</h2><p>${esc(msg)}</p><button class="btn" data-do="online">Volver</button></div>`)},
  ncreate(){screen('<div class="col side"><h2>Creando sala…</h2></div>');
   loadPeer(ok=>{if(!ok)return A.nerr('No se pudo cargar la conexión online (¿sin internet?).');
+   const to=setTimeout(()=>A.nerr('No se pudo crear la sala: el servidor online no responde. Comprueba tu conexión o prueba más tarde. Historia y Arcade funcionan sin conexión.'),9000);
    const mk=()=>{const code=Array.from({length:4},()=>'ABCDEFGHJKMNPQRSTUVWXYZ'[Math.floor(Math.random()*23)]).join('');
     const pe=new Peer('ycb-'+code);net.peer=pe;
-    pe.on('open',()=>{net.room=true;net.host=true;net.code=code;net.me=0;net.pl=[{...myInfo(),conn:null}];net.mode='story';net.ch=0;A.lobby()});
-    pe.on('error',er=>{if(er.type==='unavailable-id'){try{pe.destroy()}catch(e){}mk()}else A.nerr('Error de conexión: '+er.type)});
+    pe.on('open',()=>{clearTimeout(to);net.room=true;net.host=true;net.code=code;net.me=0;net.pl=[{...myInfo(),conn:null}];net.mode='story';net.ch=0;A.lobby()});
+    pe.on('error',er=>{if(er.type==='unavailable-id'){try{pe.destroy()}catch(e){}mk()}else{clearTimeout(to);A.nerr(netErrMsg(er))}});
     pe.on('connection',c=>{c.on('data',d=>netHost(c,d));c.on('close',()=>netDrop(c))})};
    mk()})},
  njoinui(){screen(`<div class="col side"><h2>Unirse a una sala</h2><p>Escribe el código de 4 letras.</p><input id="rc" maxlength="4" autocomplete="off" style="font:400 30px 'Bungee',Impact,sans-serif;text-transform:uppercase;width:170px;padding:8px;text-align:center"><button class="btn" data-do="njoin">Entrar</button><button class="btn" data-do="online">Volver</button></div>`);ui.querySelector('#rc').focus()},
@@ -1175,7 +1180,7 @@ Object.assign(A,{
   screen('<div class="col side"><h2>Conectando…</h2></div>');
   loadPeer(ok=>{if(!ok)return A.nerr('No se pudo cargar la conexión online (¿sin internet?).');
    const pe=new Peer();net.peer=pe;const to=setTimeout(()=>A.nerr('No se encontró la sala '+code+'.'),10000);
-   pe.on('error',er=>{clearTimeout(to);A.nerr(er.type==='peer-unavailable'?'No existe la sala '+code+'.':'Error de conexión: '+er.type)});
+   pe.on('error',er=>{clearTimeout(to);A.nerr(er.type==='peer-unavailable'?'No existe la sala '+code+'.':netErrMsg(er))});
    pe.on('open',()=>{const c=pe.connect('ycb-'+code,{serialization:'json',reliable:true});net.conn=c;
     c.on('open',()=>{clearTimeout(to);net.room=true;net.host=false;net.code=code;netSend(c,{t:'hello',...myInfo()})});
     c.on('data',netGuest);
@@ -1191,7 +1196,7 @@ Object.assign(A,{
  npick(i){sel=+i;const q=net.pl[net.me];if(q){q.cid=CHARS[sel].id;q.lvl=save.chars[q.cid].lvl}
   if(net.host)lobbyBroadcast();else netSend(net.conn,{t:'char',...myInfo()});A.lobby()},
  nmode(m){net.mode=m;lobbyBroadcast();A.lobby()},
- nch(d){net.ch=clamp(net.ch+ +d,0,Math.max(0,save.unlocked-1));lobbyBroadcast();A.lobby()},
+ nch(d){net.ch=clamp(net.ch+ +d,0,10);lobbyBroadcast();A.lobby()},
  nstart(){if(!net.host)return;Object.assign(net.pl[0],myInfo());startGame(net.mode,net.mode==='story'?net.ch:0)},
  nleave(){netClose();A.main()}
 });
