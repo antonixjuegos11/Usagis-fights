@@ -82,7 +82,7 @@ label.btn{cursor:pointer}
     <div class="pad"><span></span><button data-k="u">▲</button><span></span><button data-k="l">◀</button><span></span><button data-k="r">▶</button><span></span><button data-k="d">▼</button><span></span></div>
     <div class="acts"><button data-k="atk">GOLPE</button><button data-k="jump">SALTO</button><button data-k="heavy">FUERTE</button><button data-k="ult">★</button><button data-k="dash">DASH</button><button data-k="crouch">AGACHAR</button></div>
   </div>
-  <div class="hint" id="hint">Mueve con flechas o WASD · J golpe · K salto · L ataque fuerte (cuesta vida) · I estrella · Shift dash · Q agacharse · P pausa</div>
+  <div class="hint" id="hint">Mueve con flechas o WASD · J golpe · K salto · L ataque fuerte (cuesta vida) · I estrella · Shift dash · Q agacharse · P pausa · Mando: X golpe · A salto · Y fuerte · RB estrella · B dash · LB agacharse · Start pausa</div>
 </div>
 <script>
 'use strict';
@@ -986,8 +986,28 @@ let menuBgIdx=9,pending={mode:'story',ch:0,from:'main'};
 
 /* ============ BUCLE ============ */
 let last=0,acc=0;
+const padPrev={};
+function padMenu(a){
+  if(G&&G.run&&G.menuOpen&&(a==='pause'||a==='dash')){resume();return}
+  if(ui.hidden)return;
+  const bs=[...ui.querySelectorAll('button:not([disabled]),input')];if(!bs.length)return;
+  const ae=document.activeElement,i=bs.indexOf(ae);
+  if(ae&&ae.type==='range'&&(a==='l'||a==='r')){ae.value=+ae.value+(a==='r'?5:-5);ae.dispatchEvent(new Event('input',{bubbles:true}));return}
+  if(a==='d'||a==='r')bs[(i+1)%bs.length].focus();
+  else if(a==='u'||a==='l')bs[(i-1+bs.length)%bs.length].focus();
+  else if(a==='jump'||a==='atk'){const b=i>=0?bs[i]:bs[0];if(b.tagName==='BUTTON')b.click()}
+  else if(a==='dash'||a==='heavy'){const bk=bs.find(x=>/^(Volver|Cancelar|Salir)/.test((x.textContent||'').trim()));if(bk)bk.click()}
+}
+function pollPad(){
+  const gp=(navigator.getGamepads?[...navigator.getGamepads()]:[]).find(g=>g&&g.connected);if(!gp)return;
+  const b=i=>!!(gp.buttons[i]&&gp.buttons[i].pressed),ax=i=>gp.axes[i]||0,dz=.45;
+  const st={l:b(14)||ax(0)<-dz,r:b(15)||ax(0)>dz,u:b(12)||ax(1)<-dz,d:b(13)||ax(1)>dz,atk:b(2),jump:b(0),heavy:b(3),ult:b(5)||b(7),dash:b(1),crouch:b(4)||b(6),pause:b(9)};
+  for(const a in st){const on=st[a];if(on===!!padPrev[a])continue;padPrev[a]=on;
+    if(G&&G.run&&!G.menuOpen){if(a==='pause'){if(on&&!G.online)pauseMenu()}else if(on)press(a);else release(a)}
+    else if(on)padMenu(a)}
+}
 function loop(ts){
-  requestAnimationFrame(loop);
+  requestAnimationFrame(loop);pollPad();
   const dt=Math.min(100,ts-last);last=ts;acc+=dt;
   while(acc>=16.67){acc-=16.67;if(G&&G.run&&!G.menuOpen)update();else tick++}
   if(G&&G.run){if(!G.guest||G.p)drawGame()}else drawMenuBg();
