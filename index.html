@@ -2,7 +2,7 @@
 <title>Usagi's Fights</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAB3klEQVR42u1avWrDMBA+uyYGzZ2KN0OgL1AofoIMgW6hULKlb9Cn6COULiVQOnfIE4S+QQuBbHoGD4Y6HRTLtHUk68e2lNwtsXPnWJ++O53uouDi/Ap8lhA8l4h9XKYT74b+tV3VAPi9L8Jn/FhcyESCsvj/5S4ctTdwMYgbB61k0B8DTDbbd3ZB5rNknbMh8mnmWgAYp1OOwZyHThigGdHW9g1A7AlBWTQaWMQw8CpkHgmRLe8nrx/sNn95AwBaRQIz4NpGA0cZkPqJFUfyPpEhAASAABAAAkAACAABuFCR5bfX2lp0oRN3oXE6Fe/syXzmOgPi2spK5aXMwKFq9VAjRBuDtCwWt16UGfjzPlsNNu3CXxID9PN+f7VYiue40ZLBC8qi1ipJ9VOCFpgsiDfP1VVMMyLCILastUoieykuo1ryGGMiG5YBq8kBGTATR/8fOCEGBFm2JTlDAHi6AwBqkH2HBiDJyvLsixUZbiWQgSPaSmAm9tGFbJ3TwCBuwUBy871vWonzPwAslm4B2IUj5irJOqcZaVGVx84x8AvDw1mfi6M1F+KNndqXtBZHpce7CmLD2e2InKjljHJf0stWJo/bYcAwZXbXQo16G0RHGGoAPp4+BoAAT68PLD+2ZMLrbl+7MQAAAABJRU5ErkJggg=="><link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAE6klEQVR4nO3dQWoUQRSH8ZpREpi1K5ldQNADCJITuHAdBMlOb+ApvIHiRgRx7cITBG+gEMhuzjCLLBIXosSe/CtJd7169aq/HwHRMT09ky/V1T3T04uHD54m4DpL7xVAu4gDEnFAIg5I9wd/f3zw3GU90IJfZ9+v/pWRAxJxQBpuVv4ZjDDomJpLMHJAIg5IxAGJOCARByTigCR3ZUNYXJyP+8bL5V79xYYz05Fj9I/fZbFeZhpHoo9bmG8ciT5uMus4En1kxZ6QDpyefVM3rY6P1ifba29aXJznJ5KZxaaUHh28GLfY9s1o5NgcrtRNU37RjRbbghnFYSfTR2jzimNzuDL6QXbZx7zi+IM+bilYHIuL86tfo5ez+4M0WmxoweJoX099EIet0DssxGFu4qbKEXFAin2EdHDscvXlh/qf209f//ufx0dFFnv7JUc8YDrfkaP+zDHcxmW+cSQOeNxk1nEk+siaexyJPjTiSIk+BOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQiAMScUAiDkjEAYk4IBEHJOKAFPujJge2L58FWmz7GDkgEQck4oBEHJCIAxJxQCIOSMQBiTggxT5Cmr+mzmiPDl5E/9jyImKPHOry9C0vOZDYcST6sBQ+jkQfZnqII9GHjWIT0tFXt7vTNRMvl3vqjtYnW6NZZMElG10D0Oi6k/57K3e9pma+j0IrVW/JRRhdl7SJzcpdf5/CXaC1AosxqYk4RqCPXcX7aCWOEQ+MPnaV7cNkzrH5+SZz6/rJ+2v/ffqGM3e/rz9n5g2D+x08xfmH40M/nILzD4eRIzPzN72gt9f9GqlwgN9ns+L1ykVnr5hYPxybXdnTj9mb91NKm8NV+f3D3P3u//ljzP3e8HBc7Fe4D88JaWe/xy5Mn0PnvRWXPjqL0u7h+O/K0sd0Rg/HPw40izggEQck/1dlw3tXY6/SBSMHJOKARByQiAMScUBib6W8xt9wenuMHJCIAxJxQGLOYSv0u6AZOSARByTigEQckJiQ2ip1RozLxJaRIwaX066II4z6fRBHJJX7II5gavbBhHSyD68G/7Apstgq59HnMXK0y/1jAYijab5n5rFZmczqHPwJHwtQCCNHAF7jB3HE4NIHcUAiDkjEAYk4ILErOxln2WOGiAMScUAiDkhMSMvjRGr0jzggEQck4oDEhNQWZ9mjT8QBiTggEQek5iakES/U2CtGDkjEAYk4INnMOfLvnDM68zil9PpzqSUhGY0c65NtNy9bz5nhZoU+outwzkGUpdge51ifbK85ydPw0vD76e9p6Z1dVtiF+cjh8nvs+LEFPSk2clwu99TBzcHPafP2Xqk7zaCP6UqOHKHfu4BdhTcr9NGT8nMO+uiGyd5KZv6RUsAzj8OtcCFWeyuXy71/X4ObvOaJV1dp9yvzjbOd2PocBAv3dIdb4SLcjpCGe7pn+IKR5+HziE93uBWeokYc4bbo+VlIgytspNJ7SPP7L+Ge7nArPE69zUq44x/hVri4qnOOcE93uBUuq/aENNzTHW6FC3I4byXc0x1uhUvp8J1gKIU4IBEHJDnneHzwvOZ6oEGMHJCIA9Li4YOn3uuARjFyQCIOSMQBiTgg/QbfjWmyzuOIXwAAAABJRU5ErkJggg==">
-<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#0d0a1f"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Barlow+Condensed:wght@500;600;700&display=swap">
 <style>
 /* Concepto: cabina de recreativa nocturna. Escenario 16:9 con menús superpuestos; controles táctiles debajo en móvil. */
@@ -204,7 +204,7 @@ const SKILLS={
  vatgi:[K(2,'Rapidez','+4% de velocidad','speed',.04),K(4,'Puño Relámpago','Golpe veloz tras un dash','dash'),K(6,'Ráfaga Final','Cuarto golpe del combo','a4'),K(10,'Sed de Pelea','Te curas un 4% del daño que haces','steal',.04),K(14,'Cadena Mayor','Cadena más fuerte y larga','heavy2'),K(20,'Salto Doble','Puedes saltar otra vez en el aire','dj'),K(27,'Instinto','8% de golpes críticos','crit',.08),K(36,'Cadena Ligera','El ataque fuerte cuesta un 30% menos','heavycost',.3),K(46,'Tormenta Mayor','Tormenta más fuerte y cura','ult2'),K(58,'Vampiro','Te curas un 5% más del daño','steal',.05),K(72,'Viento Cruzado','+6% de velocidad','speed',.06),K(86,'Piel de Acero','Recibes un 8% menos de daño','reduce',.08),K(100,'Rey de la Calle','Empiezas con una estrella extra','startstars',1)],
  facundo:[K(2,'Piel de Caparazón','Recibes un 6% menos de daño','reduce',.06),K(4,'Mordisco Rápido','Mordisco tras un dash','dash'),K(7,'Mordisco Final','Cuarto golpe del combo','a4'),K(10,'Sangre Fría','Recuperas 0,5 PV por segundo','regen',.5),K(14,'Cuello de Goma','Cuellazo más fuerte y largo','heavy2'),K(19,'Dura de Pelar','Atacando no te interrumpen','armor'),K(25,'Ojo de Reptil','8% de golpes críticos','crit',.08),K(33,'Sin Prisa','El ataque fuerte cuesta un 30% menos','heavycost',.3),K(43,'Furia Mayor','Caparazón Furioso más fuerte y cura','ult2'),K(55,'Mala Leche','Te curas un 5% del daño que haces','steal',.05),K(70,'Coraza Vieja','Recibes un 10% menos de daño','reduce',.1),K(85,'Colmillo Certero','+10% de críticos','crit',.1),K(100,'Rey del Estanque','Empiezas con una estrella extra','startstars',1)],
  fimoking:[K(2,'Aguante','Recibes un 6% menos de daño','reduce',.06),K(5,'Placaje','Embestida tras un dash','dash'),K(8,'Remate Final','Cuarto golpe del combo','a4'),K(12,'Grito de la Grada','Recuperas 0,5 PV por segundo','regen',.5),K(16,'Cabeza Dura','Atacando no te interrumpen','armor'),K(21,'Chilena Plus','Disparo a Puerta más fuerte','heavy2'),K(28,'Peso Pesado','8% de golpes críticos','crit',.08),K(38,'Menos Cuesta','El ataque fuerte cuesta un 30% menos','heavycost',.3),K(48,'Hinchada Total','Hinchada más fuerte y cura más','ult2'),K(60,'Capitán','Te curas un 5% del daño que haces','steal',.05),K(75,'Muro','Recibes un 10% menos de daño','reduce',.1),K(90,'Fichaje Estrella','+5% de estrellas al derrotar','starfind',.05),K(100,'Rey del Estadio','Empiezas con una estrella extra','startstars',1)]
- ,papetos:[K(2,'Mira Fina','+5% de golpe crítico','crit',.05),K(4,'Disparo en Retirada','Disparas al hacer dash','dash'),K(7,'Ráfaga Final','Cuarto ataque: ráfaga de 3 balas','a4'),K(10,'Ballesta Reforzada','Ataque fuerte +35% de daño','heavy2'),K(14,'Recarga Rápida','El ataque fuerte cuesta menos vida','heavycost',.4)]
+ ,papetos:[K(2,'Mira Fina','+5% de golpe crítico','crit',.05),K(4,'Disparo en Retirada','Disparas al hacer dash','dash'),K(7,'Ráfaga Final','Cuarto ataque: ráfaga de 3 balas','a4'),K(10,'Ballesta Reforzada','Ataque fuerte +35% de daño','heavy2'),K(14,'Recarga Rápida','El ataque fuerte cuesta menos vida','heavycost',.4),K(19,'Chaleco Antibalas','Recibes un 6% menos de daño','reduce',.06),K(25,'Ojo de Halcón','8% de golpes críticos','crit',.08),K(33,'Sangre Fría','Atacando no te interrumpen','armor'),K(44,'Lluvia Mayor','Lluvia de Plomo más fuerte y cura','ult2'),K(56,'Bala Vampira','Te curas un 5% del daño que haces','steal',.05),K(70,'Pulso Firme','+10% de críticos','crit',.1),K(85,'Chaleco Reforzado','Recibes un 10% menos de daño','reduce',.1),K(100,'Maestro Tirador','Empiezas con una estrella extra','startstars',1)]
 };
 const AN={usagi:{a3:'hook',a4:'hook',heavy:'spin',dashatk:'charge',ult:'peace'},
  amaris:{a1:'kick',a2:'kick',a3:'dkick',a4:'spinkick',heavy:'flykick',dashatk:'slide',ult:'kickrain'},
@@ -646,10 +646,11 @@ function hitObj(b){
   b.hp--;b.sh=8;S.hit();burst(b.x,b.y-24,'#c9b79a',5,2);
   if(b.hp>0)return;
   G.objs.splice(G.objs.indexOf(b),1);S.big();burst(b.x,b.y-20,'#c9b79a',14,4);G.shake=Math.max(G.shake,4);
-  let d=b.drop;if(d==='food'&&Math.random()<sk(G.p,'starfind'))d='star';
+  let d=b.k==='crate'?'coin':(b.drop||'coin');if(d==='food'&&Math.random()<sk(G.p,'starfind'))d='star';
   if(d==='food')G.items.push({k:'food',x:b.x,y:b.y,heal:Math.random()<.3?40:20});
   else if(d==='star')G.items.push({k:'star',x:b.x,y:b.y});
   else if(d==='wpn')G.items.push({k:'wpn',x:b.x,y:b.y,w:pick(DROPW),dur:null});
+  else{const n=2+Math.floor(Math.random()*3);for(let i=0;i<n;i++)G.items.push({k:'coin',x:b.x+(i-(n-1)/2)*20,y:b.y+rnd(-6,6),v:50*(1+Math.floor(Math.random()*4))})}
 }
 function drawObj(c,b){
   const x=b.x+(b.sh>0?Math.sin(b.sh*2)*3:0),y=b.y;if(b.sh>0)b.sh--;
@@ -660,11 +661,24 @@ function drawObj(c,b){
   else{R(c,x-14,y-80,28,80,'#c22a2a');R(c,x-10,y-70,20,32,'#9ad8ee');R(c,x-14,y-84,28,6,'#8a1a1a')}
   if(b.hp<3){c.strokeStyle='rgba(0,0,0,.6)';c.lineWidth=2;c.beginPath();c.moveTo(x-8,y-30);c.lineTo(x,y-20);c.lineTo(x-4,y-10);c.stroke()}
 }
+function ffHit(a,o,dmg,knock){
+  o.hp-=dmg;o.flash=6;burst(o.x,o.y-o.z-40,'#ff9a6a',6);S.hit();txt(o.x+rnd(-8,8),o.y-o.z-80,Math.round(dmg),'#ff9a6a');
+  if(o.st==='grab')releaseGrab(o,false);
+  const dir=o.x>=a.x?1:-1;
+  if(o.hp<=0){o.hp=0;o.dying=true;o.st='air';o.vz=5.5;o.vx=dir*4.5;o.z=Math.max(o.z,1);killReward(o);return}
+  if(knock){o.st='air';o.vz=5;o.vx=dir*3;o.sT=0}else{o.st='stun';o.sT=14;o.vx=dir*2}
+}
+const ffOk=o=>!(o.dead||o.dying||o.boss||o.st==='air'||o.st==='down'||o.st==='enter'||o.ffCd>0);
+function ffMelee(e,reach){for(const o of G.en){if(o===e||!ffOk(o))continue;const dx=(o.x-e.x)*e.face;
+  if(dx>-12&&dx<reach&&Math.abs(o.y-e.y)<26&&o.z<50){o.ffCd=20;ffHit(e,o,e.dmg*.6,e.type==='tank')}}}
+function ffProj(q){q.age=(q.age||0)+1;if(q.age<8)return;
+  for(const o of G.en){if(!ffOk(o))continue;
+    if(Math.abs(q.x-o.x)<20&&Math.abs(q.y-o.y)<24&&q.z<70){o.ffCd=10;ffHit({x:q.x-Math.sign(q.vx)},o,q.dmg*.6,false);q.dead=true;return}}}
 function hurtEnemy(e,dmg,src,knock,o={}){
   let d=dmg*(src.atkMul||1);
-  if(src===G.p){const cr=sk(src,'crit');if(cr&&Math.random()<cr){d*=1.8;txt(e.x,e.y-e.z-108,'¡CRÍTICO!','#ff9a2e')}}
+  const ow=src.owner||src;if(ow===G.p){const cr=sk(ow,'crit');if(cr&&Math.random()<cr){d*=1.8;txt(e.x,e.y-e.z-108,'¡CRÍTICO!','#ff9a2e')}}
   e.hp-=d;
-  if(src===G.p){const sl=sk(src,'steal');if(sl)src.hp=Math.min(src.maxhp,src.hp+d*sl)}e.flash=6;G.shake=Math.max(G.shake,knock?6:2);
+  if(ow===G.p){const sl=sk(ow,'steal');if(sl)ow.hp=Math.min(ow.maxhp,ow.hp+d*sl)}e.flash=6;G.shake=Math.max(G.shake,knock?6:2);
   burst(e.x,e.y-e.z-40,knock?'#ffc233':'#fff',knock?10:6);
   (knock?S.big:S.hit)();
   txt(e.x+rnd(-8,8),e.y-e.z-80,Math.round(d),knock?'#ffc233':'#fff');
@@ -800,7 +814,8 @@ function updPlayer(p){
   }
   for(let i=G.items.length-1;i>=0;i--){const it=G.items[i];if(Math.abs(it.x-p.x)<26&&Math.abs(it.y-p.y)<20&&p.z<20){
     if(it.k==='food'){p.hp=Math.min(p.maxhp,p.hp+it.heal);txt(p.x,p.y-100,'+'+it.heal,'#6cff8a');S.pick();G.items.splice(i,1)}
-    else if(it.k==='star'){p.stars=Math.min(6,p.stars+1);txt(p.x,p.y-100,'+★','#ffc233');S.pick();G.items.splice(i,1)}}}
+    else if(it.k==='star'){p.stars=Math.min(6,p.stars+1);txt(p.x,p.y-100,'+★','#ffc233');S.pick();G.items.splice(i,1)}
+    else if(it.k==='coin'){G.score+=it.v;txt(p.x,p.y-100,'+'+it.v,'#ffd84a');S.pick();G.items.splice(i,1)}}}
 }
 
 /* ---- enemigos ---- */
@@ -818,6 +833,7 @@ function slamLand(e){
   e.st='move';e.cool=e.rage?40:80;e.pat=null;
 }
 function updEnemy(e){
+  if(e.ffCd>0)e.ffCd--;
   const p=G.p;
   e.t++;if(e.flash>0)e.flash--;if(e.inv>0)e.inv--;if(e.cool>0)e.cool--;if(e.stagCd>0)e.stagCd--;
   e.x+=e.vx;e.vx*=.86;
@@ -844,6 +860,7 @@ function updEnemy(e){
       if(!e.hitDone&&e.sT===12&&e.type!=='ranged'){
         e.hitDone=true;
         const dx=(p.x-e.x)*e.face,reach=e.type==='tank'?72:62;
+        if(e.type!=='grabber')ffMelee(e,reach);
         if(dx>-12&&dx<reach&&Math.abs(p.y-e.y)<26&&p.z<50){
           if(e.type==='grabber'){if(!p.dead&&p.inv<=0&&p.st==='idle'){p.st='held';p.heldBy=e;p.mash=0;p.act=null;p.x=e.x+e.face*34;p.y=e.y;e.st='grab';e.sT=80;S.hurt();return}}
           else hurtPlayer(e.dmg,e,e.type==='tank');
@@ -889,6 +906,7 @@ function bossAtk(e){
   const p=G.p;
   if(e.pat==='charge'){
     e.x+=e.face*(e.rage?10:8)*(e.sT/28+.35);e.x=clamp(e.x,G.cx+30,G.cx+W-30);
+    for(const o of G.en)if(o!==e&&ffOk(o)&&Math.abs(o.x-e.x)<50&&Math.abs(o.y-e.y)<28){o.ffCd=30;ffHit(e,o,e.dmg*.8,true)}
     if(!e.hitDone&&Math.abs(p.x-e.x)<48&&Math.abs(p.y-e.y)<28&&p.z<40){e.hitDone=true;hurtPlayer(e.dmg*1.4,e,true)}
     if(--e.sT<=0){e.st='move';e.cool=e.rage?35:75;e.pat=null}
   }else if(e.pat==='slam'){e.x+=(p.x-e.x)*.045;e.y+=(p.y-e.y)*.04}
@@ -901,16 +919,19 @@ function bossAtk(e){
 /* ---- proyectiles ---- */
 function updProj(q){
   q.x+=q.vx;q.rot=(q.w==='arrow'||q.w==='bullet')?(q.vx<0?Math.PI:0):q.rot+.4;
-  if(q.own==='e'){const p=G.p;if(Math.abs(q.x-p.x)<18&&Math.abs(q.y-p.y)<20&&!(p.crouch&&q.z>30)&&p.z<q.z+10){if(hurtPlayer(q.dmg,{x:q.x-Math.sign(q.vx)},false)){q.dead=true;burst(q.x,q.y-q.z,'#5fd08a',8)}}}
+  if(q.own==='e'){ffProj(q);const p=G.p;if(!q.dead&&Math.abs(q.x-p.x)<18&&Math.abs(q.y-p.y)<20&&!(p.crouch&&q.z>30)&&p.z<q.z+10){if(hurtPlayer(q.dmg,{x:q.x-Math.sign(q.vx)},false)){q.dead=true;burst(q.x,q.y-q.z,'#5fd08a',8)}}}
   else for(const e of G.en){
     if(e.dead||e.dying||e.st==='down'||e.st==='air'||e.st==='enter')continue;
     if(q.hit&&q.hit.has(e))continue;
     if(Math.abs(q.x-e.x)<(q.pt?q.pt.rad+12:26)&&Math.abs(q.y-e.y)<28){
-      hurtEnemy(e,q.dmg/(G.p.atkMul||1),{x:q.x-Math.sign(q.vx),atkMul:G.p.atkMul,kbv:4},!(q.pt&&q.pt.soft));
+      hurtEnemy(e,q.dmg/(G.p.atkMul||1),{x:q.x-Math.sign(q.vx),atkMul:G.p.atkMul,kbv:4,owner:G.p},!(q.pt&&q.pt.soft));
       burst(q.x,q.y-q.z,q.pt?q.pt.col:'#fff',8);
       if(q.pt&&q.pt.pierce)q.hit.add(e);else{q.dead=true;break}
     }
   }
+  if(q.own!=='e'&&!q.dead)for(const b of G.objs.slice()){
+    if(q.hit&&q.hit.has(b))continue;
+    if(Math.abs(q.x-b.x)<(q.pt?q.pt.rad:10)+14&&Math.abs(q.y-b.y)<24&&q.z<80){hitObj(b);if(q.pt&&q.pt.pierce&&q.hit)q.hit.add(b);else{q.dead=true;break}}}
   if(q.x<G.cx-30||q.x>G.cx+W+30)q.dead=true;
 }
 /* ---- flujo de oleadas ---- */
@@ -995,6 +1016,7 @@ function itemDraw(c,it,t){
   const bob=Math.sin(t*.1+it.x)*2;
   c.save();c.globalAlpha=.35;c.fillStyle='#000';c.beginPath();c.ellipse(it.x,it.y,12,4,0,0,7);c.fill();c.restore();
   if(it.k==='food'){R(c,it.x-10,it.y-18+bob,20,14,'#d98a3a');R(c,it.x-4,it.y-24+bob,8,8,'#f4e2c4')}
+  else if(it.k==='coin'){c.save();c.shadowColor='#ffd84a';c.shadowBlur=8;c.fillStyle='#ffd84a';c.beginPath();c.ellipse(it.x,it.y-12+bob,8,8,0,0,7);c.fill();c.fillStyle='#c8961c';c.beginPath();c.ellipse(it.x,it.y-12+bob,4.5,4.5,0,0,7);c.fill();c.restore()}
   else if(it.k==='star'){c.save();c.shadowColor='#ffc233';c.shadowBlur=14;c.fillStyle='#ffc233';c.font='30px '+FB;c.textAlign='center';c.fillText('★',it.x,it.y-6+bob);c.restore()}
   else{const w=WPN[it.w];c.save();c.translate(it.x,it.y-6+bob);c.rotate(-.3);R(c,-w.len/2,-3,w.len,6,w.col);c.restore();
     c.fillStyle='rgba(255,255,255,.75)';c.font='600 13px '+FB;c.textAlign='center';c.fillText(w.n,it.x,it.y-24+bob)}
