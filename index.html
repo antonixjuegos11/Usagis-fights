@@ -56,7 +56,7 @@ p{margin:0;color:var(--mute);line-height:1.25}
 #touch .joy{position:absolute;left:calc(env(safe-area-inset-left,0px) + 3vw);bottom:calc(env(safe-area-inset-bottom,0px) + 5vh);width:150px;height:150px;border-radius:50%;background:rgba(26,20,54,.42);border:2px solid rgba(169,159,207,.6);pointer-events:auto;touch-action:none;transform-origin:bottom left;transform:scale(var(--s,1))}
 #touch .joy::before{content:'';position:absolute;inset:34px;border-radius:50%;border:2px dashed rgba(169,159,207,.3)}
 #touch .joy i{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(255,194,51,.8);border:2px solid rgba(255,255,255,.55);box-shadow:0 2px 8px #0008}
-#touch .acts{position:absolute;right:calc(env(safe-area-inset-right,0px) + 2vw);bottom:calc(env(safe-area-inset-bottom,0px) + 5vh);width:232px;height:164px;transform-origin:bottom right;transform:scale(var(--s,1))}
+#touch .acts{position:absolute;right:calc(env(safe-area-inset-right,0px) + 2vw);bottom:calc(env(safe-area-inset-bottom,0px) + 5vh);width:232px;height:222px;transform-origin:bottom right;transform:scale(var(--s,1))}
 #touch .acts button{position:absolute;padding:0;display:flex;align-items:center;justify-content:center;font:700 14px var(--f-b);letter-spacing:.03em;color:var(--fg);background:rgba(42,32,86,.62);border:2px solid rgba(169,159,207,.7);border-radius:50%;pointer-events:auto;touch-action:none;-webkit-tap-highlight-color:transparent}
 #touch .acts button.on{background:var(--acc);color:#1b1230;border-color:var(--acc)}
 .b-atk{width:78px;height:78px;right:4px;bottom:4px;font-size:16px!important;background:rgba(255,77,58,.55)!important}
@@ -65,6 +65,7 @@ p{margin:0;color:var(--mute);line-height:1.25}
 .b-ult{width:54px;height:54px;right:84px;bottom:86px;font-size:24px!important}
 .b-dash{width:54px;height:54px;right:162px;bottom:20px}
 .b-crouch{width:54px;height:54px;right:156px;bottom:84px;font-size:11px!important}
+.b-grab{width:56px;height:56px;right:96px;bottom:150px;font-size:10px!important;background:rgba(90,180,255,.5)!important}
 #fs{display:flex;align-items:center;justify-content:center;position:absolute;top:8px;right:8px;z-index:4;width:38px;height:38px;border-radius:4px;border:2px solid var(--line);background:rgba(26,20,54,.8);color:var(--fg);font:700 20px/1 var(--f-b);cursor:pointer;padding:0}
 #fs:hover,#fs:focus-visible{background:var(--acc);color:#1b1230;border-color:var(--acc);outline:none}
 #fs[hidden],#stage:not(.inmenu) #fs{display:none!important}
@@ -120,10 +121,10 @@ label.btn{cursor:pointer}
     <button id="fs" title="Pantalla completa (F)" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M3 9V3h6M15 3h6v6M21 15v6h-6M9 21H3v-6"/></svg></button>
     <div id="touch" hidden>
       <div class="joy" aria-label="Joystick"><i></i></div>
-      <div class="acts"><button class="b-atk" data-k="atk">GOLPE</button><button class="b-jump" data-k="jump">SALTO</button><button class="b-heavy" data-k="heavy">FUERTE</button><button class="b-ult" data-k="ult"><svg viewBox="-12 -12 24 24" width="30" height="30" aria-hidden="true"><polygon points="0.0,-11.0 2.7,-3.7 10.5,-3.4 4.4,1.4 6.5,8.9 0.0,4.6 -6.5,8.9 -4.4,1.4 -10.5,-3.4 -2.7,-3.7" fill="currentColor"/></svg></button><button class="b-dash" data-k="dash">DASH</button><button class="b-crouch" data-k="crouch">AGACH.</button></div>
+      <div class="acts"><button class="b-atk" data-k="atk">GOLPE</button><button class="b-jump" data-k="jump">SALTO</button><button class="b-heavy" data-k="heavy">FUERTE</button><button class="b-ult" data-k="ult"><svg viewBox="-12 -12 24 24" width="30" height="30" aria-hidden="true"><polygon points="0.0,-11.0 2.7,-3.7 10.5,-3.4 4.4,1.4 6.5,8.9 0.0,4.6 -6.5,8.9 -4.4,1.4 -10.5,-3.4 -2.7,-3.7" fill="currentColor"/></svg></button><button class="b-dash" data-k="dash">DASH</button><button class="b-grab" data-k="grab">AGARRE</button><button class="b-crouch" data-k="crouch">AGACH.</button></div>
     </div>
   </div>
-  <div class="hint" id="hint">Mueve con flechas o WASD · J golpe · K salto · L ataque fuerte (cuesta vida) · I estrella · Shift dash · Q agacharse · P pausa · F pantalla completa · Coop local: J1 WASD+Z X C V, J2 flechas+J K L I · Mando: X golpe · A salto · Y fuerte · RB estrella · B dash · LB agacharse · Start pausa</div>
+  <div class="hint" id="hint">Mueve con flechas o WASD · J golpe · K salto · L ataque fuerte (cuesta vida) · I estrella · Shift dash · E agarrar y lanzar · Q agacharse · P pausa · F pantalla completa · Coop local: J1 WASD+Z X C V, J2 flechas+J K L I · Mando: X golpe · A salto · Y fuerte · RB estrella · RT agarrar · B dash · LB agacharse · Start pausa</div>
 </div>
 <div id="rotate"><div class="ico"><svg viewBox="0 0 48 80" width="56" height="92" fill="none" stroke="#ffc233" stroke-width="4" aria-hidden="true"><rect x="6" y="4" width="36" height="72" rx="7"/><circle cx="24" cy="66" r="3" fill="#ffc233" stroke="none"/></svg></div><b>Gira el móvil</b><span>Usagi's Fights solo se puede jugar en horizontal.</span></div>
 <script>
@@ -342,9 +343,9 @@ const S={hit:()=>sfx(180,.07,'square',1,-80),big:()=>sfx(110,.18,'sawtooth',1.2,
   hurt:()=>sfx(150,.14,'sawtooth',1,-90),ult:()=>sfx(90,.6,'sawtooth',1.4,500),deny:()=>sfx(120,.1,'square',.8),lvl:()=>{sfx(520,.1,'triangle');setTimeout(()=>sfx(780,.18,'triangle'),90)},boss:()=>sfx(70,.5,'sawtooth',1.3,40)};
 
 const keys={},pressed={};
-const MAP={ArrowLeft:'l',KeyA:'l',ArrowRight:'r',KeyD:'r',ArrowUp:'u',KeyW:'u',ArrowDown:'d',KeyS:'d',KeyJ:'atk',KeyZ:'atk',KeyK:'jump',KeyX:'jump',KeyL:'heavy',KeyC:'heavy',KeyI:'ult',KeyV:'ult',ShiftLeft:'dash',ShiftRight:'dash',Space:'dash',KeyQ:'crouch',Escape:'pause',KeyP:'pause'};
-const CO1={KeyA:'l',KeyD:'r',KeyW:'u',KeyS:'d',KeyZ:'atk',KeyX:'jump',KeyC:'heavy',KeyV:'ult',ShiftLeft:'dash',Space:'dash',KeyQ:'crouch',Escape:'pause',KeyP:'pause'};
-const CO2={ArrowLeft:'l',ArrowRight:'r',ArrowUp:'u',ArrowDown:'d',KeyJ:'atk',KeyK:'jump',KeyL:'heavy',KeyI:'ult',ShiftRight:'dash',KeyU:'crouch',Numpad1:'atk',Numpad2:'jump',Numpad3:'heavy',Numpad5:'ult',Numpad0:'dash',Numpad4:'crouch'};
+const MAP={ArrowLeft:'l',KeyA:'l',ArrowRight:'r',KeyD:'r',ArrowUp:'u',KeyW:'u',ArrowDown:'d',KeyS:'d',KeyJ:'atk',KeyZ:'atk',KeyK:'jump',KeyX:'jump',KeyL:'heavy',KeyC:'heavy',KeyI:'ult',KeyV:'ult',KeyE:'grab',KeyB:'grab',ShiftLeft:'dash',ShiftRight:'dash',Space:'dash',KeyQ:'crouch',Escape:'pause',KeyP:'pause'};
+const CO1={KeyA:'l',KeyD:'r',KeyW:'u',KeyS:'d',KeyZ:'atk',KeyX:'jump',KeyC:'heavy',KeyV:'ult',KeyB:'grab',ShiftLeft:'dash',Space:'dash',KeyQ:'crouch',Escape:'pause',KeyP:'pause'};
+const CO2={ArrowLeft:'l',ArrowRight:'r',ArrowUp:'u',ArrowDown:'d',KeyJ:'atk',KeyK:'jump',KeyL:'heavy',KeyI:'ult',KeyO:'grab',Numpad6:'grab',ShiftRight:'dash',KeyU:'crouch',Numpad1:'atk',Numpad2:'jump',Numpad3:'heavy',Numpad5:'ult',Numpad0:'dash',Numpad4:'crouch'};
 function p2set(b,on){const q=G&&G.ps&&G.ps[1];if(!q||!q.net)return;if(on&&!q.net.k[b])q.net.p[b]=1;q.net.k[b]=on?1:0}
 function press(a){if(!keys[a])pressed[a]=1;keys[a]=1}
 function release(a){keys[a]=0}
@@ -815,14 +816,71 @@ function doAct(p,a){
   if(!n&&k!=='heavy')S.swing();
   if(k==='heavy'){ring(p.x,p.y-20,Math.min(d.reach,120),'#fff');G.shake=Math.max(G.shake,8)}
 }
+/* ===== AGARRES Y LANZAMIENTOS ===== */
+const NOGRAB=['air','down','grab','held','thrown','enter'];
+const grabbable=e=>!(e.dead||e.dying||e.boss||e.elite||e.armor||NOGRAB.includes(e.st));
+function tryGrab(p){
+  if(p.gCd>0||p.hold)return;p.gCd=18;let best=null,bd=1e9,heavy=null;
+  for(const e of G.en){if(e.dead||e.dying||e.z>20||NOGRAB.includes(e.st))continue;const dx=(e.x-p.x)*p.face;
+    if(dx<-10||dx>54||Math.abs(e.y-p.y)>24)continue;
+    if(!grabbable(e)){heavy=e;continue}if(dx<bd){bd=dx;best=e}}
+  if(!best){if(heavy){txt(p.x,p.y-100,'¡DEMASIADO PESADO!','#ff9a6a');S.deny()}return}
+  best.st='held';best.hb=G.ps.indexOf(p);best.hSt=150;best.tele=0;best.aim=0;best.ab=null;best.alpha=1;best.vx=0;
+  p.hold=best;p.gp='hold';p.hh=0;p.act=null;p.vx=0;S.big();burst(best.x,best.y-40,'#fff',6);txt(p.x,p.y-100,'¡AGARRE!','#6ab0ff');
+}
+function dropHold(p,escape){const e=p.hold;p.hold=null;if(p.gp==='hold'||p.gp==='slam')p.gp=null;p.slam=0;
+  if(e&&e.st==='held'){e.st='stun';e.sT=escape?24:16;e.hb=null;e.vx=-p.face*2;e.inv=10;if(escape)txt(e.x,e.y-e.z-90,'¡SE ZAFA!','#fff')}}
+function holdHit(p,e,d,fin){
+  d*=p.atkMul||1;e.hp-=d;e.flash=6;burst(e.x,e.y-e.z-40,fin?'#ffc233':'#fff',fin?10:6);txt(e.x+rnd(-8,8),e.y-e.z-80,Math.round(d),fin?'#ffc233':'#fff');
+  G.combo++;G.comboT=100;G.score+=Math.round(d*3);G.shake=Math.max(G.shake,fin?6:2);(fin?S.big:S.hit)();e.hSt=Math.max(e.hSt,70);
+  if(e.hp<=0){e.hp=0;e.dying=true;e.st='air';e.vz=5.5;e.vx=p.face*4.5;e.z=Math.max(e.z,1);e.hb=null;p.hold=null;p.gp=null;killReward(e);return}
+  if(fin){p.hold=null;p.gp=null;e.hb=null;e.st='air';e.vz=5;e.vx=p.face*5;e.sT=0}
+}
+function throwE(p,dir){const e=p.hold;p.hold=null;p.gp='throw';p.gt=14;p.face=dir;
+  e.st='thrown';e.tvx=dir*11;e.vz=5;e.z=Math.max(e.z,16);e.thr=new Set();e.own=G.ps.indexOf(p);e.hb=null;e.x=p.x+dir*30;e.face=-dir;S.big();burst(p.x+dir*20,p.y-40,'#fff',8)}
+function slamEnemy(p){const e=p.hold;p.slam=0;p.gp=null;p.hold=null;if(!e||e.st!=='held')return;
+  e.x=p.x-p.face*30;e.y=p.y;e.z=0;e.vz=0;e.hb=null;ring(e.x,e.y,66,'#ffc233');G.shake=Math.max(G.shake,11);S.big();
+  hurtEnemy(e,30,p,true);
+  for(const o of G.en)if(o!==e&&!o.dead&&!o.dying&&!o.boss&&o.st!=='enter'&&Math.abs(o.x-e.x)<66&&Math.abs(o.y-e.y)<34)hurtEnemy(o,12,p,true)}
+function holdTick(p,dx,dy,gr){
+  const e=p.hold;
+  if(!e||e.st!=='held'||e.dead||e.dying){p.hold=null;if(p.gp==='hold'||p.gp==='slam')p.gp=null;p.slam=0;return false}
+  if(p.slam)return true;
+  if(pressed.grab){const back=dx!==0&&dx!==p.face;throwE(p,back?-p.face:p.face);return true}
+  if(pressed.jump&&gr){p.slam=1;p.vz=8.2;p.gp='slam';S.swing();return true}
+  if(pressed.atk){p.hh++;holdHit(p,e,p.hh>=3?11:6,p.hh>=3);p.flash=2;return true}
+  const sp=p.spd*(1+sk(p,'speed'))*.5;
+  if(dx||dy){p.x+=dx*sp;p.y+=dy*sp*.6;p.ph+=.12;p.mvT=3}
+  return true;
+}
+function thrownLand(e,wall){const th=G.ps[e.own]||G.p,keep=G.p;G.p=th;e.tvx=0;
+  ring(e.x,e.y,50,'#cbbca0');G.shake=Math.max(G.shake,6);S.big();e.thr=null;e.st='move';
+  hurtEnemy(e,wall?18:14,th,true);G.p=keep}
+function updHeld(e){
+  const hl=G.ps[e.hb];if(!hl||hl.hold!==e){e.st='stun';e.sT=12;e.hb=null;return}
+  const f=hl.face;
+  if(hl.slam){const k=clamp((8.2-hl.vz)/16.4,0,1);e.x=hl.x+f*30*Math.cos(k*Math.PI);e.z=hl.z+34+34*Math.sin(k*Math.PI);e.vz=0}
+  else{e.x=hl.x+f*30;e.z=0;e.vz=0}
+  e.y=hl.y;e.face=-f;e.ph+=.1;
+  if(!hl.slam&&--e.hSt<=0)dropHold(hl,true);
+}
+function updThrown(e){
+  const th=G.ps[e.own]||G.p,keep=G.p;G.p=th;e.x+=e.tvx;e.ph+=.5;
+  for(const t of G.en){if(t===e||t.dead||t.dying||t.st==='enter'||e.thr.has(t))continue;
+    if(Math.abs(t.x-e.x)<34&&Math.abs(t.y-e.y)<28&&Math.abs(t.z-e.z)<60){e.thr.add(t);hurtEnemy(t,16,th,true);burst(t.x,t.y-t.z-40,'#ffc233',8)}}
+  for(const b of G.objs.slice())if(Math.abs(e.x-b.x)<32&&Math.abs(e.y-b.y)<28&&e.z<70&&!e.thr.has(b)){e.thr.add(b);hitObj(b)}
+  if(e.x<G.cx+12||e.x>G.cx+W-12){e.x=clamp(e.x,G.cx+12,G.cx+W-12);thrownLand(e,true)}
+  G.p=keep;
+}
 function updPlayer(p){
-  p.t++;if(p.mvT>0)p.mvT--;if(p.inv>0)p.inv--;if(p.dashCd>0)p.dashCd--;if(p.dashT>0)p.dashT--;if(p.flash>0)p.flash--;if(p.buf>0)p.buf--;
+  p.t++;if(p.gCd>0)p.gCd--;if(p.mvT>0)p.mvT--;if(p.inv>0)p.inv--;if(p.dashCd>0)p.dashCd--;if(p.dashT>0)p.dashT--;if(p.flash>0)p.flash--;if(p.buf>0)p.buf--;
   if(p.comboT>0&&--p.comboT===0)p.combo=0;
   if(p.chip>p.hp)p.chip-=.5;else p.chip=p.hp;
   if(G.state==='fight'&&!p.dead&&p.hp>0){const rg=sk(p,'regen');if(rg)p.hp=Math.min(p.maxhp,p.hp+rg/60)}
   p.x+=p.vx;p.vx*=.85;if(Math.abs(p.vx)<.05)p.vx=0;
-  if(p.z>0||p.vz>0){p.z+=p.vz;p.vz-=.38;if(p.z<=0){p.z=0;p.vz=0;p.jumps=0;if(p.st==='air'){p.st='down';p.sT=p.dead?70:44}else if(p.act&&p.act.kind==='jk')p.act=null}}
+  if(p.z>0||p.vz>0){p.z+=p.vz;p.vz-=.38;if(p.z<=0){p.z=0;p.vz=0;p.jumps=0;if(p.slam)slamEnemy(p);if(p.st==='air'){p.st='down';p.sT=p.dead?70:44}else if(p.act&&p.act.kind==='jk')p.act=null}}
   p.x=clamp(p.x,G.cx+22,Math.min(G.lv.w-22,G.cx+W-22));p.y=clamp(p.y,Y0,Y1);
+  if(p.hold&&(p.st!=='idle'||p.dead))dropHold(p);
   if(p.st==='hurt'){if(--p.sT<=0)p.st='idle';return}
   if(p.st==='air')return;
   if(p.st==='down'){if(--p.sT<=0){if(p.dead){if(G.lives>0){G.lives--;p.dead=false;p.hp=p.maxhp;p.chip=p.hp;p.stars=1+sk(p,'startstars');p.wpn=null;p.st='idle';p.inv=170;p.x=G.cx+W/2;p.y=430;txt(p.x,p.y-100,'¡OTRA OPORTUNIDAD!','#2ee6c5')}else if(G.ps.every(q=>q.dead||q.gone))endRun(false);else p.sT=30}else{p.st='idle';p.inv=60}}return}
@@ -830,12 +888,15 @@ function updPlayer(p){
   const dx=(keys.r?1:0)-(keys.l?1:0),dy=(keys.d?1:0)-(keys.u?1:0),gr=p.z<=0;
   p.crouch=!!keys.crouch&&gr&&!p.act;
   if(pressed.pause&&!G.online){pauseMenu();return}
+  if(p.gp==='throw'){if(--p.gt<=0)p.gp=null;return}
+  if(p.hold){if(holdTick(p,dx,dy,gr))return}
   if(pressed.atk)p.buf=12;
   if(!p.act){
     if(pressed.jump&&gr&&!p.crouch){p.vz=8.4;S.swing()}
     else if(pressed.jump&&!gr&&p.jumps<1&&sk(p,'dj')){p.jumps=1;p.vz=7.6;S.swing();burst(p.x,p.y-p.z,'#fff',6,2)}
     else if(pressed.dash&&gr&&p.dashCd<=0){{const ml=isMelee(p);p.dashCd=ml?38:46;p.dashT=16;p.vx=(dx||p.face)*(ml?12:10);if(dx)p.face=dx;p.inv=Math.max(p.inv,ml?20:14)}S.swing();burst(p.x,p.y,'#aaa',6,2)}
     else if(pressed.ult&&p.stars>0){p.stars--;startAct(p,'ult')}
+    else if(pressed.grab&&gr&&!p.crouch)tryGrab(p);
     else if(pressed.heavy){
       if(p.wpn){startAct(p,'throw');if(dx)p.face=dx}
       else{const cost=Math.max(4,Math.round(p.maxhp*.07*(1-sk(p,'heavycost'))));
@@ -996,7 +1057,7 @@ function updEnemy(e){
   const p=G.p;
   e.t++;if(e.flash>0)e.flash--;if(e.inv>0)e.inv--;if(e.cool>0)e.cool--;if(e.stagCd>0)e.stagCd--;
   e.x+=e.vx;e.vx*=.86;
-  if(e.z>0||e.vz){e.z+=e.vz;e.vz-=.38;if(e.z<=0){e.z=0;e.vz=0;if(e.st==='air'){e.st='down';e.sT=e.dying?38:50;G.shake=Math.max(G.shake,3)}else if(e.pat==='slam'&&e.st==='atk')slamLand(e);else if(e.ab==='leap'&&e.st==='ab'&&e.abT>22)leapLand(e)}}
+  if(e.z>0||e.vz){e.z+=e.vz;e.vz-=.38;if(e.z<=0){e.z=0;e.vz=0;if(e.st==='air'){e.st='down';e.sT=e.dying?38:50;G.shake=Math.max(G.shake,3)}else if(e.pat==='slam'&&e.st==='atk')slamLand(e);else if(e.ab==='leap'&&e.st==='ab'&&e.abT>22)leapLand(e);else if(e.st==='thrown')thrownLand(e)}}
   e.y=clamp(e.y,Y0,Y1);
   if(e.st!=='enter')e.x=clamp(e.x,G.cx+16,G.cx+W-16);
   const d=EN[e.vk||e.type]||{wind:20,cool:70};
@@ -1016,6 +1077,8 @@ function updEnemy(e){
         if(e.type==='ranged'){G.pr.push({own:'e',w:d.pw||'bottle',x:e.x+e.face*20,y:e.y,z:44,vx:e.face*(d.ps||4.6),dmg:e.dmg,rot:0});S.swing()}
       }return}
     case 'ab':abRun(e,p,d);return;
+    case 'held':updHeld(e);return;
+    case 'thrown':updThrown(e);return;
     case 'atk':{
       if(e.boss){bossAtk(e);return}
       if(!e.hitDone&&e.sT===12&&e.type!=='ranged'){
@@ -1233,13 +1296,14 @@ function itemDraw(c,it,t){
 }
 function playerPose(p){
   if(p.st==='down')return['down',0];if(p.st==='hurt'||p.st==='air')return['hurt',0];if(p.st==='held')return['held',0];
+  if(p.gp==='hold')return['atk',.55];if(p.gp==='throw')return['atk',clamp((p.gt||0)/14,0,1)];if(p.gp==='slam')return['up',1];
   if(p.act){const d=AD(p,p.act.kind);return[d.pose,p.ext,d.an,d.reach]}
   if(p.z>0)return['jump',0];
   return[p.mvT>0&&!p.crouch?'walk':'idle',0];
 }
 function enemyPose(e){
   switch(e.st){case 'down':return['down',0];case 'air':case 'stun':return['hurt',0];
-    case 'atk':return[e.boss&&e.pat==='slam'?'jk':'atk',1];case 'grab':return['atk',.5];case 'wind':return['idle',0];case 'ab':return[e.abT<(e.abW||0)?'idle':'atk',1];
+    case 'atk':return[e.boss&&e.pat==='slam'?'jk':'atk',1];case 'grab':return['atk',.5];case 'wind':return['idle',0];case 'held':case 'thrown':return['hurt',0];case 'ab':return[e.abT<(e.abW||0)?'idle':'atk',1];
     default:return['walk',0]}
 }
 function drawUltFX(c,p){
@@ -1379,7 +1443,7 @@ function padMenu(a){
 }
 const padPrev2={};
 function padState(gp){const b=i=>!!(gp.buttons[i]&&gp.buttons[i].pressed),ax=i=>gp.axes[i]||0,dz=.45;
-  return{l:b(14)||ax(0)<-dz,r:b(15)||ax(0)>dz,u:b(12)||ax(1)<-dz,d:b(13)||ax(1)>dz,atk:b(2),jump:b(0),heavy:b(3),ult:b(5)||b(7),dash:b(1),crouch:b(4)||b(6),pause:b(9)}}
+  return{l:b(14)||ax(0)<-dz,r:b(15)||ax(0)>dz,u:b(12)||ax(1)<-dz,d:b(13)||ax(1)>dz,atk:b(2),jump:b(0),heavy:b(3),ult:b(5),grab:b(7),dash:b(1),crouch:b(4)||b(6),pause:b(9)}}
 function pollPad(){
   const pads=(navigator.getGamepads?[...navigator.getGamepads()]:[]).filter(g=>g&&g.connected);const gp=pads[0];if(!gp)return;
   const st=padState(gp);
@@ -1486,7 +1550,7 @@ const A={
    <div class="row"><button class="btn ${s.shake?'on':''}" data-do="tg" data-a="shake">Sacudida: ${s.shake?'sí':'no'}</button><button class="btn ${s.fx?'on':''}" data-do="tg" data-a="fx">Partículas: ${s.fx?'todas':'pocas'}</button>
    <button class="btn ${(s.res||1)===1?'on':''}" data-do="res" data-a="1">Resolución 960×540</button><button class="btn ${s.res===.67?'on':''}" data-do="res" data-a=".67">Resolución 640×360</button></div>
    <div class="tag">Controles</div><div class="keys"><b>Mover</b><span>Flechas o WASD (adelante/atrás = profundidad)</span><b>Golpe</b><span>J o Z · tres pulsaciones hacen combo · recoge armas</span><b>Salto</b><span>K o X · golpe en el aire con J</span>
-   <b>Fuerte</b><span>L o C · golpe circular, invulnerable al inicio, cuesta ~7% de vida. Con arma: la lanza</span><b>Estrella</b><span>I o V · ataque definitivo, gasta 1 estrella</span><b>Dash</b><span>Shift o Espacio</span><b>Agacharse</b><span>Q · esquiva proyectiles</span><b>Pausa</b><span>P o Esc</span><b>Coop local</b><span>J1: WASD + Z X C V, Shift/Espacio dash, Q agacharse · J2: flechas + J K L I, Shift derecho dash, U agacharse · o dos mandos</span></div>
+   <b>Fuerte</b><span>L o C · golpe circular, invulnerable al inicio, cuesta ~7% de vida. Con arma: la lanza</span><b>Estrella</b><span>I o V · ataque definitivo, gasta 1 estrella</span><b>Dash</b><span>Shift o Espacio</span><b>Agacharse</b><span>Q · esquiva proyectiles</span><b>Agarrar</b><span>E o B (J2: O) · cerca de un enemigo. Con él agarrado: Golpe = rodillazo (el 3º lo lanza lejos) · Agarrar = lanzarlo (con la dirección contraria, por detrás) · Salto = suplex. No sirve con jefes, minijefes ni enemigos blindados</span><b>Pausa</b><span>P o Esc</span><b>Coop local</b><span>J1: WASD + Z X C V, Shift/Espacio dash, Q agacharse · J2: flechas + J K L I, Shift derecho dash, U agacharse · o dos mandos</span></div>
    <p class="hint">Reasignar teclas queda para la siguiente versión.</p>
    <div class="row"><button class="btn" data-do="reset">Borrar progreso</button><button class="btn" data-do="extras">Volver</button></div></div>`);
   document.getElementById('vol').addEventListener('input',e=>{save.set.vol=e.target.value/100;persist();S.hit()});
@@ -1547,7 +1611,7 @@ function netHost(c,raw){let m;try{m=typeof raw==='string'?JSON.parse(raw):raw}ca
 function netDrop(c){const i=net.pl.findIndex(q=>q.conn===c);if(i<0)return;net.pl.splice(i,1);
   if(G&&G.run&&G.ps){const q=G.ps.find(z=>z.conn===c);if(q){q.gone=true;q.dead=true}}else{lobbyBroadcast();A.lobby()}}
 function netSnap(){try{const o={t:'snap',cx:G.cx,state:G.state,score:G.score,lives:G.lives,wave:G.wave,gi:G.gi,go:G.go,shake:G.shake,flash:G.flash,banner:G.banner,combo:G.combo,hz:G.hz,
-  ps:G.ps.map(({conn,net:_n,heldBy,c,kit,...r})=>({...r,c:c.id})),en:G.en,items:G.items,objs:G.objs,pr:G.pr.map(({hit,pl,...r})=>r),fx:G.fx.slice(-60),txt:G.txt};
+  ps:G.ps.map(({conn,net:_n,heldBy,hold,c,kit,...r})=>({...r,c:c.id})),en:G.en,items:G.items,objs:G.objs,pr:G.pr.map(({hit,pl,...r})=>r),fx:G.fx.slice(-60),txt:G.txt};
   const s=JSON.stringify(o,NRE);for(const q of G.ps)if(q.conn&&q.conn.open)q.conn.send(s)}catch(e){}}
 function netGuest(raw){let m;try{m=typeof raw==='string'?JSON.parse(raw):raw}catch(e){return}
   if(m.t==='lobby'){net.pl=m.pl;net.me=m.me;net.mode=m.mode;net.ch=m.ch;if(inLobby())A.lobby()}
